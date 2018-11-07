@@ -14,14 +14,14 @@ import json
 """
 This module will allow the user to convert csv tables into JSON files for importing. The structure will be:
     
-    Culture Dict - 
-        Culture : Dice table (dict) 
+    Primary Dict - 
+        individual_tables : Dice table (dict) 
     
     and
     
     Dice_table (dict)-
     
-        DiceRoll : [FirstName_Male FirstName_Female Surname]
+        DiceRoll : entry(ies)
         
     Assumes we are in the directory with the CSV files
     
