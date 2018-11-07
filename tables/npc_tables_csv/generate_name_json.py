@@ -27,8 +27,9 @@ This module will allow the user to convert csv tables into JSON files for import
     
     To use:
         Place this file in the directory containing the csv files and run.
+        
 """
-
+# FIXME: Fix the naming to be more general
 curr_path = os.path.dirname(os.path.realpath(__file__))
 
 csv_files = glob.glob(curr_path + '/*.csv')

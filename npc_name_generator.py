@@ -78,12 +78,22 @@ class npc_name_generator(object):
                 raise Exception('Culture not found in culture list')
     @property
     def sex(self):
-        return self._sex
+        if self._sex == 0:
+            return "Male"
+        elif self._sex == 1:
+            return "Female"
 
     @sex.setter
     def sex(self, sex_value):
+        #Set Sex value
         if sex_value is None:
             self.generate_random_sex()
+        elif not (sex_value == 0 or sex_value == 1 or sex_value == "Male" or sex_value == "Female"):
+            raise Exception("Sex value is incorrect")
+        elif sex_value == "Male":
+            self._sex = 0
+        elif sex_value == "Female":
+            self._sex = 1
         else:
             self._sex = sex_value
 
@@ -117,20 +127,19 @@ class npc_name_generator(object):
         firstname_group_list = self.rollable_table.get_dic_group(rand_firstname_num)
         lastname_group_list = self.rollable_table.get_dic_group(rand_lastname_num)
         
-        self.firstname = firstname_group_list[self.sex]
+        self.firstname = firstname_group_list[self._sex]
         self.lastname = lastname_group_list[2]
-        self.full_name = '{} {}'.format(self.firstname,self.lastname)
+        self.full_name = '{} {}'.format(self.firstname, self.lastname)
 
     @staticmethod
     def return_culture_list():
         return list(npc_name_generator.full_name_tables.keys())
         
     def __str__(self):
-        if self.sex == 0:
-            sex = "Male"
-        elif self.sex == 1:
-            sex = "Female"
-        return 'Name: {}, Sex: {}, Culture: {}'.format(self.full_name, sex, self.culture)
+        return 'Name: {}, Sex: {}, Culture: {}'.format(self.full_name, self.sex, self.culture)
+
+    def get_npc_list(self):
+        return [self.full_name, self.sex, self.culture]
 
 if __name__ == '__main__':
     r = npc_name_generator('Arabic')

@@ -1,4 +1,5 @@
 from collections import OrderedDict
+import random as rng
 
 class parse_rollable_tables(object):
     """ Parse table exported from the SWNRE, particularly ones with multiple dice rolls associated with multiple outcomes
@@ -61,7 +62,13 @@ class parse_rollable_tables(object):
         self.largest_dice_roll = list(self.mapped_dice_range.keys())[-1]
 
     def get_dic_group(self, random_number):
+        # Use if you want the value with a pre_gen random number
         self.create_grouped_dictionary()
         group_num = self.mapped_dice_range[random_number]
         keys_dict = list(self._dict_to_parse.keys())
         return self._dict_to_parse[keys_dict[group_num]]
+
+    def roll_random_from_dic(self):
+        # Use to roll internally
+        random_num = rng.randint(1, self.largest_dice_roll)
+        return self.get_dic_group(random_num)
