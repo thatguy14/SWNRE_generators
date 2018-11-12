@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" serverName="https://github.com/thatguy14/SWNRE_generators.git" uploadOnCheckin="bb869f15-0c53-4fc1-9881-3013fc179b82">
-    <serverData>
-      <paths name="https://github.com/thatguy14/SWNRE_generators.git">
-        <serverdata>
-          <mappings>
-            <mapping local="$PROJECT_DIR$" web="/" />
-          </mappings>
-        </serverdata>
-      </paths>
-    </serverData>
+  <component name="PublishConfigData" uploadOnCheckin="bb869f15-0c53-4fc1-9881-3013fc179b82">
     <option name="myUploadOnCheckinName" value="https://github.com/thatguy14/SWNRE_generators.git" />
   </component>
 </project>

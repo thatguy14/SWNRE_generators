@@ -3,6 +3,7 @@ import npc_name_generator as name_gen
 import parse_rollable_tables as parse_tables
 import os
 import json
+import win32clipboard as w32c
 
 class generate_full_npc(object):
 
@@ -65,12 +66,29 @@ class generate_full_npc(object):
     def __str__(self):
         return_string = ''
         for keys in self._npc_profile:
-            return_string = return_string + '\n' + "{}: {}".format(keys, self._npc_profile[keys])
-        return return_string
+            return_string = return_string + "{}: {}".format(keys, self._npc_profile[keys]) + '\n'
+        return return_string.rstrip("\n\r")
 
+    def copy_to_clipboard(self):
+        CF_RTF = w32c.RegisterClipboardFormat("Rich Text Format")
+
+        string_copy = "{\\rtf1\\ansi\\deff0 {\\pard "
+
+        for keys in self._npc_profile:
+            string_copy = string_copy + '\\b {}: \\b0 {} \line'.format(keys,self._npc_profile[keys])
+
+        string_copy = string_copy + '\\par}}'
+
+        rtf = bytearray(string_copy,'utf8')
+        w32c.OpenClipboard(0)
+        w32c.EmptyClipboard()
+        w32c.SetClipboardData(CF_RTF, rtf)
+        w32c.CloseClipboard()
+        return "Copied to clipboard"
 
 if __name__ == '__main__':
     t = generate_full_npc('Arabic','Female')
+    t.copy_to_clipboard()
     print(t)
 
 
